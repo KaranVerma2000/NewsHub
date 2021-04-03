@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/antic_slab</item>
+        <item>@font/bree_serif</item>
+        <item>@font/cabin</item>
+        <item>@font/cairo_semibold</item>
+        <item>@font/prociono</item>
+    </array>
+</resources>

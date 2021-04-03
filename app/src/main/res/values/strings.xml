@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NewsForYou</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_login_mobile">We will send you an <b>One Time Password</b> on this mobile number</string>
+    <string name="login_otp_text">Enter the OTP sent to <b>+91-9305104792</b></string>
+</resources>

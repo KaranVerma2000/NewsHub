@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context=".Fragments.LoginMobileFragment">
+
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/mobile_pic"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OTP VERIFICATION"
+            android:layout_gravity="center"
+            android:fontFamily="@font/prociono"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:textColor="@android:color/black"/>
+
+        <View
+            android:layout_height="10dp"
+            android:layout_width="0dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_login_mobile"
+            android:layout_gravity="center"
+            android:fontFamily="@font/prociono"
+            android:layout_margin="5dp"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"/>
+
+        <View
+            android:layout_height="40dp"
+            android:layout_width="0dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Mobile Number"
+            android:layout_gravity="center"
+            android:fontFamily="@font/prociono"
+            android:textSize="14dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/et_country_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLength="3"
+                android:paddingBottom="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                android:text="+91"
+                android:focusedByDefault="false"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:textAlignment="center"/>
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="30dp"/>
+
+            <EditText
+                android:id="@+id/et_login_mobile"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLength="10"
+                android:nextFocusDown="@id/button_get_otp"
+                android:focusable="true"
+                android:paddingBottom="15dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"
+                android:text=""
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:textStyle="bold"
+                android:focusedByDefault="true"
+                android:textSize="18dp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="30dp"/>
+
+        <TextView
+            android:id="@+id/button_get_otp"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="GET OTP"
+            android:textSize="18dp"
+            android:elevation="20dp"
+            android:background="@drawable/background"
+            android:padding="10dp"
+            android:fontFamily="@font/prociono"
+            android:textColor="@android:color/white"
+            android:textAlignment="center" />
+
+    </LinearLayout>

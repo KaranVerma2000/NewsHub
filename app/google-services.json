@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "775289920576",
+    "project_id": "newshub-beb0d",
+    "storage_bucket": "newshub-beb0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775289920576:android:81a1aea7ef2b60fe15d3a5",
+        "android_client_info": {
+          "package_name": "com.example.newsforyou"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "775289920576-khiafmpavq01f4ndnnbjsmh7go0jnals.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAagnuOxPE1dTt4tUyXqI8L28INu2SmYUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "775289920576-khiafmpavq01f4ndnnbjsmh7go0jnals.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
