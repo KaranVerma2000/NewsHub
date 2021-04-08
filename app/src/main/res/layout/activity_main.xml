@@ -8,19 +8,30 @@
     tools:context=".Activities.MainActivity">
 
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
+    <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottom_background"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="match_parent"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav"
-        app:itemIconSize="22dp"
-        android:elevation="25dp"
-        app:itemIconTint="@drawable/nav_button_state"
-        app:labelVisibilityMode="unlabeled"
-        app:elevation="20dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_background"
+            android:elevation="25dp"
+            app:itemIconSize="22dp"
+            app:itemIconTint="@drawable/nav_button_state"
+            app:labelVisibilityMode="unlabeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/frame"
+            app:menu="@menu/bottom_nav" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

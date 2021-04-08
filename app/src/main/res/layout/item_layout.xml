@@ -2,34 +2,36 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
         android:layout_margin="4dp"
         android:elevation="15dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#E9FAFF"
             android:orientation="horizontal"
-            android:padding="5dp"
-            android:background="#E9FAFF">
-            
-            
+            android:padding="5dp">
+
+
             <androidx.cardview.widget.CardView
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                app:cardCornerRadius="10dp"
                 android:layout_marginRight="5dp"
+                android:backgroundTint="@color/white"
                 android:elevation="20dp"
-                android:backgroundTint="@color/white">
+                app:cardCornerRadius="10dp">
 
                 <ImageView
                     android:id="@+id/news_image"
@@ -45,29 +47,30 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/newsTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="serif"
                     android:lines="3"
                     android:text="my name is karan verma and i m android developer .jej vjlew vj vjef vjf jfe bjfjefj fj jfjfj rnviweniewnfierngvroengvrenlgev ewkv ewv ew vewj vjwe vlew vle"
-                    android:ellipsize="end"
-                    android:textSize="16dp"
                     android:textColor="#03476D"
-                    android:fontFamily="serif"/>
+                    android:textSize="16dp" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/news_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:lines="1"
                     android:text="Mar 31, 2021 | 16:10 pm"
                     android:textColor="@android:color/darker_gray"
-                    android:fontFamily="sans-serif"
-                    android:textSize="12dp"/>
+                    android:textSize="12dp" />
 
 
             </LinearLayout>

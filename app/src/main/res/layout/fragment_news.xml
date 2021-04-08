@@ -7,15 +7,23 @@
     android:background="@color/white"
     tools:context=".Fragments.NewsFragment">
 
-    <LinearLayout
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#E9FAFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardElevation="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="15dp"
+        android:background="#E9FAFF">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -29,7 +37,7 @@
             android:layout_height="20dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width= "match_parent"
             android:layout_height="wrap_content"
             android:text="Global News"
             android:fontFamily="@font/prociono"
@@ -38,8 +46,10 @@
             android:textSize="25dp"
             android:layout_marginTop="10dp"/>
     </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="5dp"

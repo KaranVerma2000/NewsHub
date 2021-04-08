@@ -8,36 +8,46 @@
     tools:context=".Fragments.ProfileFragment">
 
     <LinearLayout
-        android:id="@+id/profile_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#E9FAFF"
-        android:padding="5dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:cardElevation="20dp">
+
+        <LinearLayout
+            android:id="@+id/profile_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E9FAFF"
+            android:paddingTop="10dp"
+            android:paddingBottom="15dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/prociono"
             android:text="Profile"
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="italic" />
     </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_bar"
-        app:layout_constraintVertical_bias="0.393">
+        android:layout_marginTop="80dp">
 
 
         <androidx.cardview.widget.CardView
@@ -51,7 +61,7 @@
             <ImageView
                 android:id="@+id/profile_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </androidx.cardview.widget.CardView>
 
@@ -63,12 +73,12 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="25dp"
+            android:drawableRight="@drawable/pen"
             android:fontFamily="@font/prociono"
             android:padding="5dp"
             android:text="karan verma"
             android:textColor="#787272"
-            android:textSize="24dp"
-            android:drawableRight="@drawable/pen"/>
+            android:textSize="24dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -85,13 +95,13 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="25dp"
+            android:drawableRight="@drawable/pen"
             android:fontFamily="@font/prociono"
             android:inputType="number"
             android:padding="05dp"
             android:text="+91-7393065010"
             android:textColor="#787272"
-            android:textSize="24dp"
-            android:drawableRight="@drawable/pen"/>
+            android:textSize="24dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -102,21 +112,26 @@
             android:background="@drawable/line" />
 
 
-        <Button
-            android:layout_width="127dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
+        <TextView
+            android:id="@+id/logOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:layout_marginTop="25dp"
-            android:background="@drawable/background"
+            android:layout_gravity="center"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:elevation="20dp"
             android:fontFamily="@font/prociono"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:background="@drawable/background"
             android:text="Log Out"
-            android:textColor="@color/white"
-            android:textFontWeight="-5"
+            android:textColor="@android:color/white"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
 
     </LinearLayout>
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
