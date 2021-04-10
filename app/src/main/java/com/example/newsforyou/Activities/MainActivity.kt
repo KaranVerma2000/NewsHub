@@ -21,14 +21,23 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav = findViewById(R.id.bottom_nav)
         bottomNav.setOnNavigationItemSelectedListener {
-            if (it.itemId == R.id.news) {
-                displayNews()
+            when(it.itemId)
+            {
+                R.id.profile ->
+                {
+                    displayProfile()
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.news ->
+                {
+                    displayNews()
+                    return@setOnNavigationItemSelectedListener true
+                }
+                else -> false
             }
-            else if (it.itemId == R.id.profile) {
-                displayProfile()
-            }
-            return@setOnNavigationItemSelectedListener true
         }
+        bottomNav.selectedItemId = R.id.news
+        supportFragmentManager.beginTransaction().replace(R.id.frame, newsFragment).commit()
 
 
     }
