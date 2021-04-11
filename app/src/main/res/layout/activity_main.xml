@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activities.MainActivity">
+    tools:context=".Activities.MainActivity"
+    app:layoutDescription="@xml/activity_main_scene">
 
 
     <FrameLayout
@@ -32,6 +34,78 @@
             app:layout_constraintTop_toBottomOf="@+id/frame"
             app:menu="@menu/bottom_nav" />
 
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:paddingVertical="7dp"
+        android:textColor="#03476D"
+        android:background="@drawable/drawer_bg"
+        android:id="@+id/Entertainment"
+        android:text="Entertainment" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:paddingVertical="7dp"
+        android:textColor="#03476D"
+        android:background="@drawable/drawer_bg"
+        android:id="@+id/Sports"
+        android:text="Sports" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
+        android:textColor="#03476D"
+        android:textAlignment="center"
+        android:background="@drawable/drawer_bg"
+        android:id="@+id/Business"
+        android:text="Business" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
+        android:textAlignment="center"
+        android:textColor="#03476D"
+        android:background="@drawable/drawer_bg"
+        android:id="@+id/International"
+        android:text="International" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
+        android:textAlignment="center"
+        android:textColor="#03476D"
+        android:background="@drawable/drawer_bg"
+        android:id="@+id/Technology"
+        android:text="Technology" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
+        android:textAlignment="center"
+        android:textColor="#03476D"
+        android:background="@drawable/drawer_bg"
+        android:id="@+id/Medical"
+        android:text="Medical" />
+
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="200dp"
+        android:layout_height="500dp"
+        android:background="@drawable/background"
+        android:elevation="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:id="@+id/flow"
+        app:constraint_referenced_ids="Entertainment,Business,Sports,International,Medical,Technology"/>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

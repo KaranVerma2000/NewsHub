@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/frame" />
+        <Constraint android:id="@+id/flow">
+            <PropertySet android:visibility="gone" />
+        </Constraint>
+        <Constraint android:id="@+id/bottom_nav" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint android:id="@id/frame"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintWidth_percent=".45"
+            />
+        <!--        <Constraint android:id="@+id/Entertainment" />-->
+        <!--        <Constraint android:id="@+id/Technology" />-->
+        <!--        <Constraint android:id="@+id/Business"/>-->
+        <!--        <Constraint android:id="@+id/Medical"/>-->
+        <!--        <Constraint android:id="@+id/Sports"/>-->
+        <!--        <Constraint android:id="@+id/International"/>-->
+        <Constraint android:id="@+id/flow">
+            <PropertySet android:visibility="visible"/>
+        </Constraint>
+        <Constraint android:id="@+id/bottom_nav">
+            <PropertySet android:visibility="gone"/>
+        </Constraint>
+
+        </ConstraintSet>
+
+    <Transition
+        motion:constraintSetEnd="@id/end"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="1500">
+
+<!--        <OnSwipe-->
+<!--            motion:dragDirection="dragLeft"-->
+<!--            motion:touchAnchorSide="left"/>-->
+
+
+        <OnSwipe
+            motion:dragDirection="dragRight"
+            motion:touchAnchorSide="middle"
+            motion:touchAnchorId="@id/frame"/>
+        <KeyFrameSet >
+            <KeyAttribute
+                motion:motionTarget="@+id/Entertainment"
+                motion:framePosition="87"
+                android:alpha="0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/Sports"
+                motion:framePosition="87"
+                android:alpha="0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/Business"
+                motion:framePosition="87"
+                android:alpha="0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/International"
+                motion:framePosition="87"
+                android:alpha="0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/Technology"
+                motion:framePosition="87"
+                android:alpha="0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/Medical"
+                motion:framePosition="87"
+                android:alpha="0" />
+        </KeyFrameSet>
+    </Transition>
+</MotionScene>
