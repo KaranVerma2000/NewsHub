@@ -3,6 +3,8 @@ package com.example.newsforyou.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.newsforyou.Fragments.NewsFragment
 import com.example.newsforyou.Fragments.ProfileFragment
 import com.example.newsforyou.R
@@ -13,12 +15,14 @@ class MainActivity : AppCompatActivity() {
     private var newsFragment = NewsFragment()
     private var profileFragment = ProfileFragment()
     private lateinit var bottomNav : BottomNavigationView
+    lateinit var motion_layout : DrawerLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        motion_layout = findViewById(R.id.motionLayout)
         bottomNav = findViewById(R.id.bottom_nav)
         bottomNav.setOnNavigationItemSelectedListener {
             when(it.itemId)

@@ -48,31 +48,19 @@
                 android:orientation="vertical"
                 android:layout_marginStart="5dp">
 
-                <TextView
-                    android:id="@+id/newsTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="serif"
-                    android:lines="3"
-                    android:text="my name is karan verma and i m android developer .jej vjlew vj vjef vjf jfe bjfjefj fj jfjfj rnviweniewnfierngvroengvrenlgev ewkv ewv ew vewj vjwe vlew vle"
-                    android:textColor="#03476D"
-                    android:textSize="16dp" />
+                <ImageView
+                    android:layout_width="180dp"
+                    android:layout_height="25dp"
+                    android:background="@color/teal_700"/>
 
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_height="15dp"/>
 
-                <TextView
-                    android:id="@+id/news_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:lines="1"
-                    android:text="Mar 31, 2021 | 16:10 pm"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="12dp" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="25dp"
+                    android:background="@color/teal_700"/>
 
 
             </LinearLayout>

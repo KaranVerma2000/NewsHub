@@ -1,111 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:background="@color/teal_700"
+    android:id="@+id/motionLayout"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".Activities.MainActivity"
-    app:layoutDescription="@xml/activity_main_scene">
+    android:layout_width="match_parent">
 
+    <include layout="@layout/main_activity_layout" />
 
-    <FrameLayout
-        android:id="@+id/frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include layout="@layout/drawerlayout_menu" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bottom_background"
-            android:elevation="25dp"
-            app:itemIconSize="22dp"
-            app:itemIconTint="@drawable/nav_button_state"
-            app:labelVisibilityMode="unlabeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frame"
-            app:menu="@menu/bottom_nav" />
-
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:paddingVertical="7dp"
-        android:textColor="#03476D"
-        android:background="@drawable/drawer_bg"
-        android:id="@+id/Entertainment"
-        android:text="Entertainment" />
-
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:paddingVertical="7dp"
-        android:textColor="#03476D"
-        android:background="@drawable/drawer_bg"
-        android:id="@+id/Sports"
-        android:text="Sports" />
-
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:paddingVertical="7dp"
-        android:textColor="#03476D"
-        android:textAlignment="center"
-        android:background="@drawable/drawer_bg"
-        android:id="@+id/Business"
-        android:text="Business" />
-
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:paddingVertical="7dp"
-        android:textAlignment="center"
-        android:textColor="#03476D"
-        android:background="@drawable/drawer_bg"
-        android:id="@+id/International"
-        android:text="International" />
-
-
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:paddingVertical="7dp"
-        android:textAlignment="center"
-        android:textColor="#03476D"
-        android:background="@drawable/drawer_bg"
-        android:id="@+id/Technology"
-        android:text="Technology" />
-
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:paddingVertical="7dp"
-        android:textAlignment="center"
-        android:textColor="#03476D"
-        android:background="@drawable/drawer_bg"
-        android:id="@+id/Medical"
-        android:text="Medical" />
-
-
-    <androidx.constraintlayout.helper.widget.Flow
-        android:layout_width="200dp"
-        android:layout_height="500dp"
-        android:background="@drawable/background"
-        android:elevation="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical"
-        android:id="@+id/flow"
-        app:constraint_referenced_ids="Entertainment,Business,Sports,International,Medical,Technology"/>
-
-
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.newsforyou.Utils.DrawerContent xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="#0DBCF3"
+    app:layoutDescription="@xml/scene_13_menu">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="20dp">
+
+        <TextView
+            android:id="@+id/Categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0DBCF3"
+            android:paddingVertical="7dp"
+            android:textSize="25dp"
+            android:text="Categories"
+            android:textAlignment="center"
+            android:textColor="#03476D"
+            android:fontFamily="@font/prociono"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/Entertainment"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_bg"
+        android:paddingVertical="7dp"
+        android:text="Entertainment"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:fontFamily="@font/prociono"
+        android:textColor="#03476D"
+        android:elevation="15dp"/>
+
+    <TextView
+        android:id="@+id/Sports"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_bg"
+        android:paddingVertical="7dp"
+        android:text="Sports"
+        android:textSize="18dp"
+        android:fontFamily="@font/prociono"
+        android:textAlignment="center"
+        android:textColor="#03476D"
+        android:elevation="15dp"/>
+
+
+    <TextView
+        android:id="@+id/Business"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_bg"
+        android:paddingVertical="7dp"
+        android:text="Business"
+        android:textSize="18dp"
+        android:fontFamily="@font/prociono"
+        android:textAlignment="center"
+        android:textColor="#03476D"
+        android:elevation="15dp"/>
+
+    <TextView
+        android:id="@+id/International"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_bg"
+        android:paddingVertical="7dp"
+        android:text="International"
+        android:textSize="18dp"
+        android:fontFamily="@font/prociono"
+        android:textAlignment="center"
+        android:textColor="#03476D"
+        android:elevation="15dp"/>
+
+
+    <TextView
+        android:id="@+id/Technology"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_bg"
+        android:paddingVertical="7dp"
+        android:text="Technology"
+        android:textSize="18dp"
+        android:fontFamily="@font/prociono"
+        android:textAlignment="center"
+        android:textColor="#03476D"
+        android:elevation="15dp"/>
+
+    <TextView
+        android:id="@+id/Medical"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_bg"
+        android:paddingVertical="7dp"
+        android:text="Medical"
+        android:textSize="18dp"
+        android:fontFamily="@font/prociono"
+        android:textAlignment="center"
+        android:textColor="#03476D"
+        android:elevation="15dp"/>
+</com.example.newsforyou.Utils.DrawerContent>
+
