@@ -23,26 +23,22 @@ interface apiInterface {
     @GET("top-headlines?country=in&$ApiKey")
     suspend fun getNews() : Response<NewsModel>
 
-//    @GET("top-headlines?country=in&category=business&$ApiKey")
-//    suspend fun getBusinessNews() : Response<NewsModel>
-//
-//    @GET("top-headlines?country=in&category=International&$ApiKey")
-//    suspend fun getInternationalNews() : Response<NewsModel>
-//
-//    @GET("top-headlines?country=in&category=medical&$ApiKey")
-//    suspend fun getMedicalNews() : Response<NewsModel>
-//
-//    @GET("top-headlines?country=in&category=technology&$ApiKey")
-//    suspend fun getTechnologyNews() : Response<NewsModel>
-//
-//    @GET("top-headlines?country=in&category=sports&$ApiKey")
-//    suspend fun getSportsNews() : Response<NewsModel>
-//
-//    @GET("top-headlines?country=in&category=entertainment&$ApiKey")
-//    suspend fun getEntertainmentNews() : Response<NewsModel>
+    @GET("top-headlines?country=in&category=business&$ApiKey")
+    suspend fun getBusinessNews() : Response<NewsModel>
 
+    @GET("everything?language=en&q=international&$ApiKey")
+    suspend fun getInternationalNews() : Response<NewsModel>
 
+    @GET("top-headlines?country=in&category=health&$ApiKey")
+    suspend fun getMedicalNews() : Response<NewsModel>
 
+    @GET("top-headlines?country=in&category=technology&$ApiKey")
+    suspend fun getTechnologyNews() : Response<NewsModel>
 
+    @GET("top-headlines?country=in&category=sports&$ApiKey")
+    suspend fun getSportsNews() : Response<NewsModel>
+
+    @GET("top-headlines?country=in&category=entertainment&$ApiKey")
+    suspend fun getEntertainmentNews() : Response<NewsModel>
 
 }
