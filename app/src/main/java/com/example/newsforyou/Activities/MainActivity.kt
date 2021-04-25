@@ -3,8 +3,8 @@ package com.example.newsforyou.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.newsforyou.Fragments.NewsFragment
 import com.example.newsforyou.Fragments.ProfileFragment
@@ -37,6 +37,11 @@ class MainActivity : AppCompatActivity() {
         international = findViewById(R.id.International)
         motion_layout = findViewById(R.id.motionLayout)
         bottomNav = findViewById(R.id.bottom_nav)
+
+
+            //Log.d("name", intent.getStringExtra("name").toString())
+
+
         bottomNav.setOnNavigationItemSelectedListener {
             when(it.itemId)
             {

@@ -57,7 +57,8 @@
             android:layout_gravity="center"
             android:backgroundTint="#E9FAFF"
             android:elevation="20dp"
-            app:cardCornerRadius="90dp">
+            app:cardCornerRadius="90dp"
+            >
 
             <ImageView
                 android:id="@+id/profile_image"
@@ -77,7 +78,7 @@
             android:drawableRight="@drawable/pen"
             android:fontFamily="@font/prociono"
             android:padding="5dp"
-            android:text="karan verma"
+            android:text="xyz"
             android:textColor="#787272"
             android:textSize="24dp" />
 
@@ -100,7 +101,7 @@
             android:fontFamily="@font/prociono"
             android:inputType="number"
             android:padding="05dp"
-            android:text="+91-7393065010"
+            android:text="+91-"
             android:textColor="#787272"
             android:textSize="24dp" />
 

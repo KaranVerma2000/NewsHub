@@ -31,7 +31,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.util.*
-import java.util.concurrent.TimeoutException
 
 
 class NewsFragment : Fragment() {
@@ -67,7 +66,7 @@ class NewsFragment : Fragment() {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 response.postValue(apiInterface.getNews())
-                Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+                Toast.makeText(view.context, "News Updated", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 Log.d("NewsError", e.message!!)
             }
@@ -77,7 +76,6 @@ class NewsFragment : Fragment() {
         a.entertainment.setOnClickListener {
             newsHeading.text = "Entertainment"
             a.motion_layout.closeDrawer(Gravity.START,true)
-            shimmerEffect()
             GlobalScope.launch(Dispatchers.Main) {
                 try {
                     response.postValue(apiInterface.getEntertainmentNews())
@@ -92,7 +90,6 @@ class NewsFragment : Fragment() {
         a.business.setOnClickListener {
             newsHeading.text = "Business"
             a.motion_layout.closeDrawer(Gravity.START,true)
-            shimmerEffect()
             GlobalScope.launch(Dispatchers.Main) {
                 try {
                     response.postValue(apiInterface.getBusinessNews())
@@ -107,7 +104,6 @@ class NewsFragment : Fragment() {
         a.sports.setOnClickListener {
             newsHeading.text = "Sports"
             a.motion_layout.closeDrawer(Gravity.START,true)
-            shimmerEffect()
             GlobalScope.launch(Dispatchers.Main) {
                 try {
                     response.postValue(apiInterface.getSportsNews())
@@ -122,7 +118,6 @@ class NewsFragment : Fragment() {
         a.medical.setOnClickListener {
             newsHeading.text = "Medical"
             a.motion_layout.closeDrawer(Gravity.START,true)
-            shimmerEffect()
             GlobalScope.launch(Dispatchers.Main) {
                 try {
                     response.postValue(apiInterface.getMedicalNews())
@@ -137,7 +132,6 @@ class NewsFragment : Fragment() {
         a.international.setOnClickListener {
             newsHeading.text = "International"
             a.motion_layout.closeDrawer(Gravity.START,true)
-            shimmerEffect()
             GlobalScope.launch(Dispatchers.Main) {
                 try {
                     response.postValue(apiInterface.getInternationalNews())
@@ -152,7 +146,6 @@ class NewsFragment : Fragment() {
         a.technology.setOnClickListener {
             newsHeading.text = "Technology"
             a.motion_layout.closeDrawer(Gravity.START,true)
-            shimmerEffect()
             GlobalScope.launch(Dispatchers.Main) {
                 try {
                     response.postValue(apiInterface.getTechnologyNews())
@@ -174,9 +167,10 @@ class NewsFragment : Fragment() {
         return view
     }
 
-    private fun shimmerEffect() {
+     @SuppressLint("ResourceType")
+     private fun shimmerEffect() {
         skeleton = newsRecyclerView.applySkeleton(R.layout.shimmer_layout, 10)
-        skeleton.maskCornerRadius = 40F
+        skeleton.maskCornerRadius = 30F
         skeleton.shimmerDurationInMillis = 2000
         skeleton.showShimmer = true
         skeleton.showSkeleton()
@@ -201,6 +195,8 @@ class NewsFragment : Fragment() {
                         )
                     )
                 }
+
+//            Handler().postDelayed(shimmerEffect(),1000)
             newsRecyclerView.adapter = NewsAdapter(view.context, newList)
         })
     }

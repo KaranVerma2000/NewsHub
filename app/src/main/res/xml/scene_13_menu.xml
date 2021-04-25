@@ -10,7 +10,8 @@
         motion:motionInterpolator="linear" >
         <OnSwipe
             motion:dragDirection="dragRight"
-            motion:touchAnchorSide="left" />
+            motion:touchAnchorSide="left"
+            />
     </Transition>
 
         <ConstraintSet android:id="@+id/start">
@@ -159,4 +160,5 @@
                 motion:layout_constraintStart_toStartOf="parent"
                 motion:layout_constraintTop_toBottomOf="@+id/International"/>
         </ConstraintSet>
+
 </MotionScene>

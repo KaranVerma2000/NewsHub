@@ -46,9 +46,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var mobileNumber: String
     private var storedVerificationId: String? = null
     private lateinit var dialog: ProgressDialog
-    private lateinit var sharedPreferences: SharedPreferences
-
-
+    lateinit var sharedPreferences: SharedPreferences
+    private lateinit var userName: EditText
+    private var Name: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         sharedPreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
-
         firebaseAuth = FirebaseAuth.getInstance()
         fragmentLoginMobile = findViewById(R.id.mobile_fragment)
         fragmentLoginOtp = findViewById(R.id.otp_fragment)
@@ -66,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         buttonVerify = findViewById(R.id.button_otp_verify)
         buttonBack = findViewById(R.id.button_back_otp)
         otpScreenText = findViewById(R.id.tv_otp_screen)
-        loadingImage = findViewById(R.id.loader_button_image)
+//        loadingImage = findViewById(R.id.loader_button_image)
         buttonResendOTP = findViewById(R.id.button_resend_otp)
         otp1 = findViewById(R.id.otp1)
         otp2 = findViewById(R.id.otp2)
@@ -74,11 +73,13 @@ class LoginActivity : AppCompatActivity() {
         otp4 = findViewById(R.id.otp4)
         otp5 = findViewById(R.id.otp5)
         otp6 = findViewById(R.id.otp6)
+        userName = findViewById(R.id.user)
+
 
         inputManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         dialog = ProgressDialog(this)
 
-        if(firebaseAuth.currentUser != null){
+        if (firebaseAuth.currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -86,12 +87,14 @@ class LoginActivity : AppCompatActivity() {
 
         buttonResendOTP.setOnClickListener {
 
-            if(!isInternetAvailable(this)){
+            if (!isInternetAvailable(this)) {
                 Toast.makeText(this, "Internet not connected", Toast.LENGTH_SHORT).show()
-            }
-
-            else if(etMobileLogin.text.toString().length == 10) {
-                Toast.makeText(this, "OTP is sent again to entered mobile number. Please wait.", Toast.LENGTH_SHORT).show()
+            } else if (etMobileLogin.text.toString().length == 10) {
+                Toast.makeText(
+                    this,
+                    "OTP is sent again to entered mobile number. Please wait.",
+                    Toast.LENGTH_SHORT
+                ).show()
 
                 fragmentLoginMobile.visibility = View.GONE
                 fragmentLoginOtp.visibility = View.VISIBLE
@@ -100,48 +103,57 @@ class LoginActivity : AppCompatActivity() {
 
                 val myCustomizedString = SpannableStringBuilder()
                     .append("Enter the OTP sent to ")
-                    .bold{ append( "${etCountryCode.text}-${etMobileLogin.text}") }
+                    .bold { append("${etCountryCode.text}-${etMobileLogin.text}") }
 
                 firebaseAuth()
                 otpScreenText.text = myCustomizedString
-            }
-            else {
+            } else {
                 etMobileLogin.requestFocus()
                 etMobileLogin.error = "Enter valid mobile number"
             }
-
         }
 
-            buttonGetOtp.setOnClickListener {
-                if(!isInternetAvailable(this)){
-                    Toast.makeText(this, "Internet not connected", Toast.LENGTH_SHORT).show()
-                }
-                else if (etMobileLogin.text.toString().length == 10) {
+        buttonGetOtp.setOnClickListener {
+            if (!isInternetAvailable(this)) {
+                Toast.makeText(this, "Internet not connected", Toast.LENGTH_SHORT).show()
+            } else {
+                if (etMobileLogin.text.toString().length == 10) {
 
-                    Toast.makeText(this, "Please wait", Toast.LENGTH_SHORT).show()
+                    if (userName.text.toString().isEmpty())
+                    {
+                        userName.requestFocus()
+                        userName.error = "Enter your name"
 
-                    fragmentLoginMobile.visibility = View.GONE
-                    fragmentLoginOtp.visibility = View.VISIBLE
+                    } else {
+                        Name = userName.text.toString()
+                        Log.d("user", Name)
 
-                    mobileNumber = "${etCountryCode.text}${etMobileLogin.text}"
+                        Toast.makeText(this, "Please wait", Toast.LENGTH_SHORT).show()
 
-                    val myCustomizedString = SpannableStringBuilder()
-                        .append("Enter the OTP sent to ")
-                        .bold{ append( "${etCountryCode.text}-${etMobileLogin.text}") }
+                        fragmentLoginMobile.visibility = View.GONE
+                        fragmentLoginOtp.visibility = View.VISIBLE
 
-                    firebaseAuth()
+                        mobileNumber = "${etCountryCode.text}${etMobileLogin.text}"
 
-                    otpScreenText.text = myCustomizedString
+                        val myCustomizedString = SpannableStringBuilder()
+                            .append("Enter the OTP sent to ")
+                            .bold { append("${etCountryCode.text}-${etMobileLogin.text}") }
 
+                        firebaseAuth()
+
+                        otpScreenText.text = myCustomizedString
+
+                    }
                 } else {
                     etMobileLogin.requestFocus()
                     etMobileLogin.error = "Enter valid mobile number"
                 }
             }
+        }
 
         buttonVerify.setOnClickListener {
 
-            if(getOtp().length == 6){
+            if (getOtp().length == 6) {
 
                 dialog.setTitle("Loading")
                 dialog.setMessage("Verifying credentials")
@@ -150,14 +162,13 @@ class LoginActivity : AppCompatActivity() {
                 buttonVerify.isClickable = false
                 verifyOTP(getOtp())
 
-                if(!isInternetAvailable(this)){
+                if (!isInternetAvailable(this)) {
                     Toast.makeText(this, "Internet not connected", Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
                 }
 
-            }
-            else{
-                Toast.makeText(applicationContext,"Enter Valid OTP",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "Enter Valid OTP", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -179,7 +190,6 @@ class LoginActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
-
 
 
     private fun textChangeListner() {
@@ -218,8 +228,9 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         otp6.addTextChangedListener {
-            if (otp6.text.toString().length+otp5.text.toString().length+otp4.text.toString().length+otp3.text.toString().length
-                +otp2.text.toString().length+otp1.text.toString().length== 6) {
+            if (otp6.text.toString().length + otp5.text.toString().length + otp4.text.toString().length + otp3.text.toString().length
+                + otp2.text.toString().length + otp1.text.toString().length == 6
+            ) {
                 inputManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
             }
         }
@@ -235,8 +246,7 @@ class LoginActivity : AppCompatActivity() {
         return "${otp1.text}${otp2.text}${otp3.text}${otp4.text}${otp5.text}${otp6.text}"
     }
 
-    private fun firebaseAuth()
-    {
+    private fun firebaseAuth() {
 
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -261,7 +271,11 @@ class LoginActivity : AppCompatActivity() {
                 // for instance if the the phone number format is not valid.
                 Log.w("Error", "onVerificationFailed ${e.message}")
                 dialog.dismiss()
-                Toast.makeText(this@LoginActivity, "Verification Failed ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@LoginActivity,
+                    "Verification Failed ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
                 if (e is FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
                     Log.w("invalid", "$e")
@@ -284,11 +298,12 @@ class LoginActivity : AppCompatActivity() {
                 // now need to ask the user to enter the code and then construct a credential
                 // by combining the code with a verification ID.
                 Log.d("Code Sent", "onCodeSent:$verificationId")
-                Toast.makeText(this@LoginActivity, "Verification code sent",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "Verification code sent", Toast.LENGTH_SHORT)
+                    .show()
 
                 // Save verification ID and resending token so we can use them later
                 storedVerificationId = verificationId
-               // resendToken = token
+                // resendToken = token
             }
         }
 
@@ -299,7 +314,8 @@ class LoginActivity : AppCompatActivity() {
             120, // Timeout duration
             TimeUnit.SECONDS, // Unit of timeout
             this, // Activity (for callback binding)
-            callbacks) // OnVerificationStateChangedCallbacks
+            callbacks
+        ) // OnVerificationStateChangedCallbacks
 
     }
 
@@ -312,8 +328,11 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("Success", "signInWithCredential:success")
-                    val intent = Intent(this, MainActivity::class.java)
 
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("name", Name)
+                    intent.putExtra("num", mobileNumber)
                     sharedPreferences.edit()
                         .putBoolean("loginStatus", true)
                         .apply()
@@ -328,16 +347,20 @@ class LoginActivity : AppCompatActivity() {
                     Log.w("Error", "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
-                        Toast.makeText(this, "The verification code entered was invalid", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "The verification code entered was invalid",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     }
                 }
             }
     }
 
-    private fun verifyOTP(otp: String){
+    private fun verifyOTP(otp: String) {
 
-        if(otp != null && storedVerificationId != null){
+        if (otp != null && storedVerificationId != null) {
             val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, otp)
             signInWithPhoneAuthCredential(credential)
             buttonVerify.isClickable = true
@@ -347,26 +370,25 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
-    fun showLoader(context: Context, title: String, message: String){
-
-        dialog = ProgressDialog(context)
-        dialog.setTitle(title)
-        dialog.setMessage(message)
-        dialog.show()
-
-    }
-
-    private fun verificationComplete(){
-
-        Toast.makeText(this, "User Verified", Toast.LENGTH_SHORT).show()
-        sharedPreferences.edit()
-            .putBoolean("loginStatus", true)
-            .apply()
-
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-
-    }
+//    fun showLoader(context: Context, title: String, message: String){
+//
+//        dialog = ProgressDialog(context)
+//        dialog.setTitle(title)
+//        dialog.setMessage(message)
+//        dialog.show()
+//
+//    }
+//
+//    private fun verificationComplete(){
+//
+//        Toast.makeText(this, "User Verified", Toast.LENGTH_SHORT).show()
+//        sharedPreferences.edit()
+//            .putBoolean("loginStatus", true)
+//            .apply()
+//
+//        val intent = Intent(this, MainActivity::class.java)
+//        startActivity(intent)
+//        finish()
+//
+//    }
 }

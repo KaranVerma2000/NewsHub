@@ -9,9 +9,9 @@
     tools:context=".Fragments.LoginMobileFragment">
 
         <ImageView
-            android:layout_width="240dp"
-            android:layout_height="240dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:src="@drawable/mobile_pic"
             android:layout_gravity="center"/>
@@ -46,6 +46,12 @@
             android:layout_height="40dp"
             android:layout_width="0dp" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +61,6 @@
             android:textSize="14dp"
             android:textAlignment="center"
             android:textColor="@android:color/darker_gray"/>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:maxLength="10"
-                android:nextFocusDown="@id/button_get_otp"
+                android:nextFocusDown="@id/user"
                 android:focusable="true"
                 android:paddingBottom="15dp"
                 android:layout_marginTop="5dp"
@@ -101,9 +106,41 @@
                 android:inputType="number"
                 android:textStyle="bold"
                 android:focusedByDefault="true"
-                android:textSize="18dp"
-                android:textAlignment="center"/>
+                android:textSize="18dp"/>
         </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Your Name"
+            android:layout_gravity="center"
+            android:fontFamily="@font/prociono"
+            android:layout_marginEnd="10dp"
+            android:textSize="15sp"
+            android:textColor="@android:color/darker_gray"/>
+
+        <EditText
+            android:id="@+id/user"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:nextFocusDown="@id/button_get_otp"
+            android:layout_marginStart="15dp"
+            android:focusable="true"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:text=""
+            android:imeOptions="actionDone"
+            android:textStyle="bold"
+            android:focusedByDefault="true"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
         <View
             android:layout_width="0dp"
