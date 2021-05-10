@@ -88,6 +88,19 @@
                 motion:layout_constraintEnd_toEndOf="parent"
                 motion:layout_constraintStart_toStartOf="parent"
                 motion:layout_constraintTop_toBottomOf="@+id/Technology" />
+
+
+            <Constraint
+                android:id="@+id/Bookmark"
+                android:paddingVertical="10dp"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:rotation="90"
+                android:translationX="100dp"
+                android:layout_marginTop="20dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toBottomOf="@+id/Medical"/>
         </ConstraintSet>
 
         <ConstraintSet android:id="@+id/end">
@@ -159,6 +172,16 @@
                 motion:layout_constraintHorizontal_bias="0.5"
                 motion:layout_constraintStart_toStartOf="parent"
                 motion:layout_constraintTop_toBottomOf="@+id/International"/>
-        </ConstraintSet>
 
+            <Constraint
+                android:id="@+id/Bookmark"
+                android:paddingVertical="10dp"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintHorizontal_bias="0.5"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toBottomOf="@+id/Medical" />
+        </ConstraintSet>
 </MotionScene>

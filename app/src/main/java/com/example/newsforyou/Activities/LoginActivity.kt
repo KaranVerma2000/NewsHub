@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.text.bold
 import androidx.core.widget.addTextChangedListener
+import com.example.newsforyou.Model.UserItem
 import com.example.newsforyou.R
 import com.example.newsforyou.Utils.UtilMethods.isInternetAvailable
 import com.google.firebase.FirebaseException
@@ -21,6 +22,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
@@ -49,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var sharedPreferences: SharedPreferences
     private lateinit var userName: EditText
     private var Name: String = ""
+    var userItem: UserItem? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,8 +124,7 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 if (etMobileLogin.text.toString().length == 10) {
 
-                    if (userName.text.toString().isEmpty())
-                    {
+                    if (userName.text.toString().isEmpty()) {
                         userName.requestFocus()
                         userName.error = "Enter your name"
 
@@ -328,15 +332,15 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("Success", "signInWithCredential:success")
-
+                    val hashMap = hashMapOf(
+                        "name" to Name,
+                        "number" to mobileNumber
+                    )
+                    FirebaseFirestore.getInstance().collection("Users")
+                        .document(FirebaseAuth.getInstance().currentUser!!.uid)
+                        .set(hashMap, SetOptions.merge())
 
                     val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("name", Name)
-                    intent.putExtra("num", mobileNumber)
-                    sharedPreferences.edit()
-                        .putBoolean("loginStatus", true)
-                        .apply()
-
                     startActivity(intent)
                     finish()
 
@@ -352,7 +356,6 @@ class LoginActivity : AppCompatActivity() {
                             "The verification code entered was invalid",
                             Toast.LENGTH_SHORT
                         ).show()
-
                     }
                 }
             }

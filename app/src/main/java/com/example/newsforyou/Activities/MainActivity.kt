@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var business : TextView
     lateinit var medical : TextView
     lateinit var sports : TextView
+    lateinit var bookmarkTab : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         medical = findViewById(R.id.Medical)
         technology = findViewById(R.id.Technology)
         international = findViewById(R.id.International)
+        bookmarkTab = findViewById(R.id.Bookmark)
         motion_layout = findViewById(R.id.motionLayout)
         bottomNav = findViewById(R.id.bottom_nav)
 

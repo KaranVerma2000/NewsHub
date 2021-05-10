@@ -109,5 +109,19 @@
         android:textAlignment="center"
         android:textColor="#03476D"
         android:elevation="15dp"/>
+
+    <TextView
+        android:id="@+id/Bookmark"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_bg"
+        android:elevation="15dp"
+        android:fontFamily="@font/prociono"
+        android:paddingVertical="7dp"
+        android:text="Bookmark"
+        android:textAlignment="center"
+        android:textColor="#03476D"
+        android:textSize="18dp" />
+
 </com.example.newsforyou.Utils.DrawerContent>
 

@@ -1,34 +1,36 @@
 package com.example.newsforyou.Fragments
 
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import android.util.Log
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.MutableLiveData
 import com.example.newsforyou.Activities.LoginActivity
 import com.example.newsforyou.Activities.MainActivity
+import com.example.newsforyou.Model.UserItem
 import com.example.newsforyou.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class ProfileFragment : Fragment() {
 
     lateinit var firebaseAuth: FirebaseAuth
     private lateinit var LogOut: TextView
-    private lateinit var user_name : TextView
-    private lateinit var Number : TextView
+    private lateinit var name: TextView
+    private lateinit var Number: TextView
+    lateinit var camBTn: ImageView
+    private val PICK_IMAGE_REQUEST = 71
+    private var filePath: Uri? = null
+    val userItem: UserItem? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +38,13 @@ class ProfileFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        user_name = view.findViewById(R.id.name)
+        name = view.findViewById(R.id.name)
         Number = view.findViewById(R.id.phone_num)
+        camBTn = view.findViewById(R.id.cam)
+
+        camBTn.setOnClickListener {
+            launchGallery()
+        }
 
         val a = view.context as MainActivity
 
@@ -45,21 +52,8 @@ class ProfileFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
 
 
-        if (a.intent.hasExtra("name")) {
-            val name = a.intent.getStringExtra("name")
-            Log.d("name",a.intent.getStringExtra("name").toString())
-            user_name.text = name
-        }
-        else{
-            user_name.text = "k.v"
-        }
-        if (a.intent.hasExtra("num")) {
-            val number = a.intent.getStringExtra("num")
-            Number.text = number
-        }
-        else{
-            Number.text = "+91-"
-        }
+        getDetails()
+
 
         LogOut = view.findViewById(R.id.logOut)
         LogOut.setOnClickListener {
@@ -69,6 +63,54 @@ class ProfileFragment : Fragment() {
             a.finish()
         }
         return view
+    }
+
+    private fun getDetails() {
+        FirebaseFirestore.getInstance().collection("Users").document(firebaseAuth.currentUser!!.uid)
+            .addSnapshotListener { v, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                if (v != null) {
+                    name.text = v.get("name").toString()
+                    Number.text = v.get("number").toString()
+                    Log.d("details", v.get("name").toString())
+                }
+            }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            uploadImage(view, data!!.data!!)
+        }
+    }
+
+    private fun uploadImage(view: View?, filePath: Uri?) {
+        if (filePath != null) {
+//            val hashMap = hashMapOf(
+//                "image" to filePath.toString()
+//            )
+//            FirebaseFirestore.getInstance().collection("Users")
+//                .document(FirebaseAuth.getInstance().currentUser!!.uid)
+//                .set(hashMap, SetOptions.merge())
+//                .addOnCompleteListener {
+//                    if (it.isSuccessful){
+//                        Toast.makeText(view!!.context, "Image Uploaded", Toast.LENGTH_SHORT).show()
+//                    }
+//                    else{
+//                        Toast.makeText(view!!.context, it.toString(), Toast.LENGTH_SHORT).show()
+//                        Log.d("image", it.toString())
+//                    }
+        }
+    }
+
+    private fun launchGallery() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
 
 

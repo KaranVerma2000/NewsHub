@@ -13,6 +13,8 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.newsforyou.R
 import com.example.newsforyou.Utils.UtilMethods.convertISOTime
+import com.example.newsforyou.database.Bookmark
+import com.example.newsforyou.database.BookmarkModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -73,18 +75,21 @@ class NewsActivity : AppCompatActivity() {
 
         Glide.with(this).load(intent.getStringExtra("urlToImage")).into(image)
 
-
         expandButton.setOnClickListener {
             onButtonClicked()
         }
+
+
         share.setOnClickListener {
-            Toast.makeText(applicationContext,"clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "clicked", Toast.LENGTH_SHORT).show()
 
             val imageUri = Uri.parse(intent.getStringExtra("urlToImage"))
             val sendIntent: Intent = Intent().setAction(Intent.ACTION_SEND)
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "*${intent.getStringExtra("title")}*\n\n" +
-                    "${intent.getStringExtra("desc")}\n\n" +
-                    "To read full news visit here :\n${intent.getStringExtra("url")}\n\n")
+            sendIntent.putExtra(
+                Intent.EXTRA_TEXT, "*${intent.getStringExtra("title")}*\n\n" +
+                        "${intent.getStringExtra("desc")}\n\n" +
+                        "To read full news visit here :\n${intent.getStringExtra("url")}\n\n"
+            )
             sendIntent.type = "text/simple"
 
 
@@ -93,39 +98,81 @@ class NewsActivity : AppCompatActivity() {
 
 
         }
+
+        checkBookmark()
+
         bookmark.setOnClickListener {
-            Toast.makeText(applicationContext,"clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Added to Bookmark", Toast.LENGTH_SHORT).show()
+            val bookmark = BookmarkModel(
+                intent.getStringExtra("author"),
+                "name",
+                intent.getStringExtra("title"),
+                intent.getStringExtra("desc"),
+                intent.getStringExtra("url"),
+                intent.getStringExtra("urlToImage"),
+                intent.getStringExtra("publishedAt"),
+                intent.getStringExtra("content")
+            )
+
+            Bookmark(this).bookmarkDao().addBookmark(bookmark)
         }
 
     }
 
+
+    private fun checkBookmark() {
+        val item = Bookmark(this).bookmarkDao().checkBookmark(
+            intent.getStringExtra("title"
+            )!!
+        )
+        if (!item.isNullOrEmpty()) {
+            Toast.makeText(applicationContext, "Already bookmarked", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun onButtonClicked() {
-        if(!clicked){
+        if (!clicked) {
             share.visibility = View.VISIBLE
             bookmark.visibility = View.VISIBLE
-        }
-        else{
+        } else {
             share.visibility = View.INVISIBLE
             bookmark.visibility = View.INVISIBLE
         }
 
-        if (!clicked)
-        {
+        if (!clicked) {
             share.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.from_left))
-            bookmark.startAnimation(AnimationUtils.loadAnimation(applicationContext,R.anim.from_bottom))
-            expandButton.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.rotate_open))
-        }
-        else{
+            bookmark.startAnimation(
+                AnimationUtils.loadAnimation(
+                    applicationContext,
+                    R.anim.from_bottom
+                )
+            )
+            expandButton.startAnimation(
+                AnimationUtils.loadAnimation(
+                    applicationContext,
+                    R.anim.rotate_open
+                )
+            )
+        } else {
             share.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.to_left))
-            bookmark.startAnimation(AnimationUtils.loadAnimation(applicationContext,R.anim.to_bottom))
-            expandButton.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.rotate_close))
+            bookmark.startAnimation(
+                AnimationUtils.loadAnimation(
+                    applicationContext,
+                    R.anim.to_bottom
+                )
+            )
+            expandButton.startAnimation(
+                AnimationUtils.loadAnimation(
+                    applicationContext,
+                    R.anim.rotate_close
+                )
+            )
         }
 
-        if (!clicked){
+        if (!clicked) {
             share.isClickable = true
             bookmark.isClickable = true
-        }
-        else{
+        } else {
             share.isClickable = false
             bookmark.isClickable = false
         }
