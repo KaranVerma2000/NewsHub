@@ -17,6 +17,8 @@ import com.example.newsforyou.Activities.LoginActivity
 import com.example.newsforyou.Activities.MainActivity
 import com.example.newsforyou.Model.UserItem
 import com.example.newsforyou.R
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
