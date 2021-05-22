@@ -1,7 +1,6 @@
 package com.example.newsforyou.Fragments
 
 import android.annotation.SuppressLint
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -13,10 +12,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.example.newsforyou.Activities.MainActivity
 import com.example.newsforyou.Adapters.NewsAdapter
 import com.example.newsforyou.Model.NewsHeadlines
@@ -40,6 +41,8 @@ class NewsFragment : Fragment() {
     private lateinit var drawer_button: ImageView
     lateinit var skeleton: Skeleton
     lateinit var newsHeading: TextView
+    lateinit var anim : LottieAnimationView
+    lateinit var noBookmark : TextView
 
 
     val response: MutableLiveData<Response<NewsModel>> = MutableLiveData()
@@ -52,6 +55,9 @@ class NewsFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_news, container, false)
+
+        anim = view.findViewById(R.id.bookmark_anim)
+
 
         val a = view.context as MainActivity
         a.motion_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
@@ -187,9 +193,8 @@ class NewsFragment : Fragment() {
 
                 myList.reverse()
                 if (myList.isNullOrEmpty())
-                    Toast.makeText(view.context, "No items to visible", Toast.LENGTH_SHORT).show()
-
-                newsRecyclerView.adapter = NewsAdapter(view.context, myList)
+                    anim.visibility = View.VISIBLE
+                    newsRecyclerView.adapter = NewsAdapter(view.context, myList)
             })
         }
 

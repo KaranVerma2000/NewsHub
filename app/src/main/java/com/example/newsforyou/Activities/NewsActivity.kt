@@ -2,19 +2,21 @@ package com.example.newsforyou.Activities
 
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.newsforyou.R
 import com.example.newsforyou.Utils.UtilMethods.convertISOTime
 import com.example.newsforyou.database.Bookmark
 import com.example.newsforyou.database.BookmarkModel
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -28,8 +30,9 @@ class NewsActivity : AppCompatActivity() {
     lateinit var date: TextView
     lateinit var expandButton: FloatingActionButton
     lateinit var share: FloatingActionButton
-    lateinit var bookmark: FloatingActionButton
+    lateinit var bookmark: ExtendedFloatingActionButton
     private var clicked = false
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,31 +105,56 @@ class NewsActivity : AppCompatActivity() {
         checkBookmark()
 
         bookmark.setOnClickListener {
-            Toast.makeText(applicationContext, "Added to Bookmark", Toast.LENGTH_SHORT).show()
-            val bookmark = BookmarkModel(
-                intent.getStringExtra("author"),
-                "name",
-                intent.getStringExtra("title"),
-                intent.getStringExtra("desc"),
-                intent.getStringExtra("url"),
-                intent.getStringExtra("urlToImage"),
-                intent.getStringExtra("publishedAt"),
-                intent.getStringExtra("content")
-            )
 
-            Bookmark(this).bookmarkDao().addBookmark(bookmark)
+            if (checkBookmark()) {
+                Bookmark(this).bookmarkDao()
+                    .removeBookmark(intent.getStringExtra("title")!!)
+
+                bookmark.backgroundTintList =
+                    ColorStateList.valueOf(resources.getColor(R.color.teal_200))
+
+                bookmark.iconTint =
+                    ColorStateList.valueOf(resources.getColor(R.color.black))
+
+                Toast.makeText(applicationContext, "Removed from Bookmark", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(applicationContext, "Added to Bookmark", Toast.LENGTH_SHORT).show()
+                bookmark.backgroundTintList =
+                    ColorStateList.valueOf(resources.getColor(R.color.black))
+                bookmark.iconTint =
+                    ColorStateList.valueOf(resources.getColor(R.color.teal_200))
+                val bookmark = BookmarkModel(
+                    intent.getStringExtra("author"),
+                    "name",
+                    intent.getStringExtra("title"),
+                    intent.getStringExtra("desc"),
+                    intent.getStringExtra("url"),
+                    intent.getStringExtra("urlToImage"),
+                    intent.getStringExtra("publishedAt"),
+                    intent.getStringExtra("content")
+                )
+
+                Bookmark(this).bookmarkDao().addBookmark(bookmark)
+            }
         }
-
     }
 
 
-    private fun checkBookmark() {
+    private fun checkBookmark(): Boolean {
         val item = Bookmark(this).bookmarkDao().checkBookmark(
-            intent.getStringExtra("title"
+            intent.getStringExtra(
+                "title"
             )!!
         )
         if (!item.isNullOrEmpty()) {
-            Toast.makeText(applicationContext, "Already bookmarked", Toast.LENGTH_SHORT).show()
+            bookmark.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.black))
+            bookmark.iconTint =
+                ColorStateList.valueOf(resources.getColor(R.color.teal_200))
+            return true
+        } else {
+            return false
         }
     }
 

@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".Fragments.LoginMobileFragment">
 
-        <ImageView
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/mobile_pic"
-            android:layout_gravity="center"/>
+<!--        <ImageView-->
+<!--            android:layout_width="220dp"-->
+<!--            android:layout_height="220dp"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:src="@drawable/mobile_pic"-->
+<!--            android:layout_gravity="center"/>-->
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_wtcy2xzl.json"/>
 
         <TextView
             android:layout_width="wrap_content"

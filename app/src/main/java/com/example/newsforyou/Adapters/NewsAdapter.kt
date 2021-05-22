@@ -2,6 +2,7 @@ package com.example.newsforyou.Adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,15 +25,17 @@ class NewsAdapter(var context : Context , var newsHeadlines : List<NewsHeadlines
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+
         if (newsHeadlines[position].title != null)
         {
+            Log.d("title", newsHeadlines.toString())
             holder.title.text = newsHeadlines[position].title
         }
-        if (newsHeadlines[position].description != null)
+        else if (newsHeadlines[position].description != null)
         {
             holder.title.text = newsHeadlines[position].description
         }
-        if (newsHeadlines[position].content != null)
+        else if (newsHeadlines[position].content != null)
         {
             holder.title.text = newsHeadlines[position].content
         }

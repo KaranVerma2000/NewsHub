@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF"
     tools:context=".Fragments.LoginOtpFragment">
 
@@ -12,13 +12,24 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="280dp"
-                android:layout_height="280dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/login_pic" />
+<!--            <ImageView-->
+<!--                android:layout_width="280dp"-->
+<!--                android:layout_height="280dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@drawable/login_pic" />-->
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:paddingVertical="10dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_url="https://assets4.lottiefiles.com/private_files/lf30_gva1sgii.json"/>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -27,6 +38,7 @@
                 android:fontFamily="@font/prociono"
                 android:text="OTP VERIFICATION"
                 android:textColor="@android:color/black"
+                android:layout_marginTop="50dp"
                 android:textSize="22dp"
                 android:textStyle="bold" />
 

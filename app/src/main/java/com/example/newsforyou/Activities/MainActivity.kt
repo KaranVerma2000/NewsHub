@@ -1,10 +1,9 @@
 package com.example.newsforyou.Activities
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.newsforyou.Fragments.NewsFragment
 import com.example.newsforyou.Fragments.ProfileFragment
@@ -15,15 +14,15 @@ class MainActivity : AppCompatActivity() {
 
     private var newsFragment = NewsFragment()
     private var profileFragment = ProfileFragment()
-    private lateinit var bottomNav : BottomNavigationView
-    lateinit var motion_layout : DrawerLayout
-    lateinit var entertainment : TextView
-    lateinit var technology : TextView
-    lateinit var international : TextView
-    lateinit var business : TextView
-    lateinit var medical : TextView
-    lateinit var sports : TextView
-    lateinit var bookmarkTab : TextView
+    private lateinit var bottomNav: BottomNavigationView
+    lateinit var motion_layout: DrawerLayout
+    lateinit var entertainment: TextView
+    lateinit var technology: TextView
+    lateinit var international: TextView
+    lateinit var business: TextView
+    lateinit var medical: TextView
+    lateinit var sports: TextView
+    lateinit var bookmarkTab: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,19 +40,16 @@ class MainActivity : AppCompatActivity() {
         bottomNav = findViewById(R.id.bottom_nav)
 
 
-            //Log.d("name", intent.getStringExtra("name").toString())
+        //Log.d("name", intent.getStringExtra("name").toString())
 
 
         bottomNav.setOnNavigationItemSelectedListener {
-            when(it.itemId)
-            {
-                R.id.profile ->
-                {
+            when (it.itemId) {
+                R.id.profile -> {
                     displayProfile()
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.news ->
-                {
+                R.id.news -> {
                     displayNews()
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -68,7 +64,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayProfile() {
         if (supportFragmentManager.findFragmentById(R.id.frame) is ProfileFragment)
-            return
+        return
+
         supportFragmentManager.beginTransaction().replace(R.id.frame, profileFragment).commit()
     }
 
