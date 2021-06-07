@@ -47,7 +47,7 @@ class ProfileFragment : Fragment() {
         Number = view.findViewById(R.id.phone_num)
         camBTn = view.findViewById(R.id.cam)
         profileImage = view.findViewById(R.id.profile_image)
-     //   cam1 = view.findViewById(R.id.cam1)
+        //   cam1 = view.findViewById(R.id.cam1)
 
         camBTn.setOnClickListener {
             launchGallery(it)
@@ -127,16 +127,16 @@ class ProfileFragment : Fragment() {
                     return@addSnapshotListener
                 }
                 val user = value!!.toObject(UserItem::class.java)
-                if (user?.image.isNullOrBlank()) {
+                if (!user?.image.isNullOrBlank()) {
+                    Glide.with(view!!).load(user!!.image).into(profileImage)
+                    camBTn.visibility = View.INVISIBLE
+                } else {
                     Toast.makeText(
                         view!!.context,
                         "Tap camera to upload profile pic ! ",
                         Toast.LENGTH_SHORT
                     ).show()
                     camBTn.visibility = View.VISIBLE
-                } else {
-                    Glide.with(view!!).load(user!!.image).into(profileImage)
-                    camBTn.visibility = View.INVISIBLE
                 }
             }
     }

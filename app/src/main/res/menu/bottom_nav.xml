@@ -5,12 +5,16 @@
     <item
         android:id="@+id/news"
         android:icon="@drawable/bottom_news"
-        android:iconTint="@color/white"
+        app:exb_color="#FFF"
+        android:iconTint="@color/black"
+        android:orderInCategory="1"
         android:title="News" />
 
     <item
         android:id="@+id/profile"
         android:icon="@drawable/bottom_profile"
+        app:exb_color="#FFF"
+        android:orderInCategory="2"
         android:iconTint="@color/white"
         android:title="Profile" />
 

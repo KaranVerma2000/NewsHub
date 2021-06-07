@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -41,9 +40,9 @@ class NewsFragment : Fragment() {
     private lateinit var drawer_button: ImageView
     lateinit var skeleton: Skeleton
     lateinit var newsHeading: TextView
-    lateinit var anim : LottieAnimationView
-    lateinit var noBookmark : TextView
-
+    lateinit var anim: LottieAnimationView
+    lateinit var noBookmark: TextView
+    lateinit var ApiInterface: apiInterface
 
     val response: MutableLiveData<Response<NewsModel>> = MutableLiveData()
 
@@ -69,133 +68,130 @@ class NewsFragment : Fragment() {
 
         shimmerEffect()
 
-        val apiInterface: apiInterface = RetrofitClient.retrofit.create(apiInterface::class.java)
+        ApiInterface = RetrofitClient.retrofit.create(apiInterface::class.java)
+
+        Log.d("Api", apiInterface.toString())
+
         GlobalScope.launch(Dispatchers.Main) {
             try {
-                response.postValue(apiInterface.getNews())
-                Toast.makeText(view.context, "News Updated", Toast.LENGTH_SHORT).show()
+                response.postValue(ApiInterface.getNews())
+                // Toast.makeText(view.context, "News Updated", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 Log.d("NewsError", e.message!!)
             }
         }
         fetchNews(view)
 
+        entertainmentNews(a, view)
+        businessNews(a, view)
+        sportsNews(a, view)
+        medicalNews(a, view)
+        internationalNews(a, view)
+        techNews(a, view)
 
-        a.entertainment.setOnClickListener {
-            newsHeading.text = "Entertainment"
-            a.motion_layout.closeDrawer(Gravity.START, true)
-            GlobalScope.launch(Dispatchers.Main) {
-                try {
-                    response.postValue(apiInterface.getEntertainmentNews())
-                    Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
-                } catch (e: Exception) {
-                    Log.d("NewsError", e.message!!)
-                }
-            }
-            fetchNews(view)
-        }
 
-        a.business.setOnClickListener {
-            newsHeading.text = "Business"
-            a.motion_layout.closeDrawer(Gravity.START, true)
-            GlobalScope.launch(Dispatchers.Main) {
-                try {
-                    response.postValue(apiInterface.getBusinessNews())
-                    Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
-                } catch (e: Exception) {
-                    Log.d("NewsError", e.message!!)
-                }
-            }
-            fetchNews(view)
-        }
-
-        a.sports.setOnClickListener {
-            newsHeading.text = "Sports"
-            a.motion_layout.closeDrawer(Gravity.START, true)
-            GlobalScope.launch(Dispatchers.Main) {
-                try {
-                    response.postValue(apiInterface.getSportsNews())
-                    Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
-                } catch (e: Exception) {
-                    Log.d("NewsError", e.message!!)
-                }
-            }
-            fetchNews(view)
-        }
-
-        a.medical.setOnClickListener {
-            newsHeading.text = "Medical"
-            a.motion_layout.closeDrawer(Gravity.START, true)
-            GlobalScope.launch(Dispatchers.Main) {
-                try {
-                    response.postValue(apiInterface.getMedicalNews())
-                    Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
-                } catch (e: Exception) {
-                    Log.d("NewsError", e.message!!)
-                }
-            }
-            fetchNews(view)
-        }
-
-        a.international.setOnClickListener {
-            newsHeading.text = "International"
-            a.motion_layout.closeDrawer(Gravity.START, true)
-            GlobalScope.launch(Dispatchers.Main) {
-                try {
-                    response.postValue(apiInterface.getInternationalNews())
-                    Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
-                } catch (e: Exception) {
-                    Log.d("NewsError", e.message!!)
-                }
-            }
-            fetchNews(view)
-        }
-
-        a.technology.setOnClickListener {
-            newsHeading.text = "Technology"
-            a.motion_layout.closeDrawer(Gravity.START, true)
-            GlobalScope.launch(Dispatchers.Main) {
-                try {
-                    response.postValue(apiInterface.getTechnologyNews())
-                    Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
-                } catch (e: Exception) {
-                    Log.d("NewsError", e.message!!)
-                }
-            }
-            fetchNews(view)
-        }
+//        a.business.setOnClickListener {
+//            newsHeading.text = "Business"
+//            a.motion_layout.closeDrawer(Gravity.START, true)
+//            GlobalScope.launch(Dispatchers.Main) {
+//                try {
+//                    response.postValue(apiInterface.getBusinessNews())
+//                    // Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+//                } catch (e: Exception) {
+//                    Log.d("NewsError", e.message!!)
+//                }
+//            }
+//            fetchNews(view)
+//        }
+//
+//        a.sports.setOnClickListener {
+//            newsHeading.text = "Sports"
+//            a.motion_layout.closeDrawer(Gravity.START, true)
+//            GlobalScope.launch(Dispatchers.Main) {
+//                try {
+//                    response.postValue(apiInterface.getSportsNews())
+//                    //    Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+//                } catch (e: Exception) {
+//                    Log.d("NewsError", e.message!!)
+//                }
+//            }
+//            fetchNews(view)
+//        }
+//
+//        a.medical.setOnClickListener {
+//            newsHeading.text = "Medical"
+//            a.motion_layout.closeDrawer(Gravity.START, true)
+//            GlobalScope.launch(Dispatchers.Main) {
+//                try {
+//                    response.postValue(apiInterface.getMedicalNews())
+//                    Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+//                } catch (e: Exception) {
+//                    Log.d("NewsError", e.message!!)
+//                }
+//            }
+//            fetchNews(view)
+//        }
+//
+//        a.international.setOnClickListener {
+//            newsHeading.text = "International"
+//            a.motion_layout.closeDrawer(Gravity.START, true)
+//            GlobalScope.launch(Dispatchers.Main) {
+//                try {
+//                    response.postValue(apiInterface.getInternationalNews())
+//                    Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+//                } catch (e: Exception) {
+//                    Log.d("NewsError", e.message!!)
+//                }
+//            }
+//            fetchNews(view)
+//        }
+//
+//        a.technology.setOnClickListener {
+//            newsHeading.text = "Technology"
+//            a.motion_layout.closeDrawer(Gravity.START, true)
+//            GlobalScope.launch(Dispatchers.Main) {
+//                try {
+//                    response.postValue(apiInterface.getTechnologyNews())
+//                    //       Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+//                } catch (e: Exception) {
+//                    Log.d("NewsError", e.message!!)
+//                }
+//            }
+//            fetchNews(view)
+//        }
 
         a.bookmarkTab.setOnClickListener {
             newsHeading.text = "Bookmark"
             a.motion_layout.closeDrawer(Gravity.START, true)
 
-            Bookmark(view.context).bookmarkDao().getBookmarks().observe(this, Observer {
+            Bookmark(view.context).bookmarkDao().getBookmarks()
+                .observe(viewLifecycleOwner, Observer {
 
-                val myList = mutableListOf<NewsHeadlines>()
-                for (i in it)
-                    if (!i.urlToImage.isNullOrEmpty()) {
+                    val myList = mutableListOf<NewsHeadlines>()
+                    for (i in it)
+                        if (!i.urlToImage.isNullOrEmpty()) {
 
-                        myList.add(
-                            NewsHeadlines(
-                                i.author,
-                                i.id.toString(),
-                                i.name,
-                                i.title,
-                                i.description,
-                                i.url,
-                                i.urlToImage,
-                                i.publishedAt,
-                                i.content
+                            myList.add(
+                                NewsHeadlines(
+                                    i.author,
+                                    i.id.toString(),
+                                    i.name,
+                                    i.title,
+                                    i.description,
+                                    i.url,
+                                    i.urlToImage,
+                                    i.publishedAt,
+                                    i.content
+                                )
                             )
-                        )
 
-                    }
+                        }
 
-                myList.reverse()
-                if (myList.isNullOrEmpty())
-                    anim.visibility = View.VISIBLE
+                    myList.reverse()
+                    if (myList.isNullOrEmpty())
+                        anim.visibility = View.VISIBLE
                     newsRecyclerView.adapter = NewsAdapter(view.context, myList)
-            })
+                })
         }
 
 
@@ -208,6 +204,117 @@ class NewsFragment : Fragment() {
         return view
     }
 
+
+
+    private fun techNews(a: MainActivity, view: View?) {
+        a.technology.setOnClickListener {
+            newsHeading.text = "Technology"
+            a.motion_layout.closeDrawer(Gravity.LEFT, true)
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    response.postValue(ApiInterface.getTechnologyNews())
+                    //       Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Log.d("NewsError", e.message!!)
+                }
+            }
+            if (view != null) {
+                fetchNews(view)
+            }
+        }
+    }
+
+    private fun internationalNews(a: MainActivity, view: View?) {
+        a.international.setOnClickListener {
+            newsHeading.text = "International"
+            a.motion_layout.closeDrawer(Gravity.LEFT, true)
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    response.postValue(ApiInterface.getInternationalNews())
+                    // Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Log.d("NewsError", e.message!!)
+                }
+            }
+            if (view != null) {
+                fetchNews(view)
+            }
+        }
+
+    }
+
+    private fun medicalNews(a: MainActivity, view: View?) {
+        a.medical.setOnClickListener {
+            newsHeading.text = "Medical"
+            a.motion_layout.closeDrawer(Gravity.LEFT, true)
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    response.postValue(ApiInterface.getMedicalNews())
+                    //Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Log.d("NewsError", e.message!!)
+                }
+            }
+            if (view != null) {
+                fetchNews(view)
+            }
+        }
+
+    }
+
+    private fun sportsNews(a: MainActivity, view: View?) {
+        a.sports.setOnClickListener {
+            newsHeading.text = "Sports"
+            a.motion_layout.closeDrawer(Gravity.LEFT, true)
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    response.postValue(ApiInterface.getSportsNews())
+                    //    Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Log.d("NewsError", e.message!!)
+                }
+            }
+            if (view != null) {
+                fetchNews(view)
+            }
+        }
+
+    }
+
+    private fun businessNews(a: MainActivity, view: View?) {
+        a.business.setOnClickListener {
+            newsHeading.text = "Business"
+            a.motion_layout.closeDrawer(Gravity.LEFT, true)
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    response.postValue(ApiInterface.getBusinessNews())
+                    // Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Log.d("NewsError", e.message!!)
+                }
+            }
+            if (view != null) {
+                fetchNews(view)
+            }
+        }
+    }
+
+    private fun entertainmentNews(a: MainActivity, view: View) {
+        a.entertainment.setOnClickListener {
+            newsHeading.text = "Entertainment"
+            a.motion_layout.closeDrawer(Gravity.LEFT, true)
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    response.postValue(ApiInterface.getEntertainmentNews())
+                    //     Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Log.d("NewsError", e.message!!)
+                }
+            }
+            fetchNews(view)
+        }
+    }
+
     @SuppressLint("ResourceType")
     private fun shimmerEffect() {
         skeleton = newsRecyclerView.applySkeleton(R.layout.shimmer_layout, 10)
@@ -218,7 +325,7 @@ class NewsFragment : Fragment() {
     }
 
     private fun fetchNews(view: View) {
-        response.observe(this, Observer {
+        response.observe(viewLifecycleOwner, Observer {
             val newList = ArrayList<NewsHeadlines>()
             for (i in it.body()?.articles!!)
                 if (!i.urlToImage.isNullOrEmpty()) {

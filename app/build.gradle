@@ -88,4 +88,9 @@ dependencies {
     //lottie animation
     implementation 'com.airbnb.android:lottie:3.5.0'
 
+    //fancyShowCaseView
+    implementation 'com.github.faruktoptas:FancyShowCaseView:1.3.5'
+
+    implementation 'com.github.st235:expandablebottombar:1.4.0'
+
 }
