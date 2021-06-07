@@ -31,6 +31,20 @@
 
 
     <TextView
+        android:id="@+id/Global"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawer_bg"
+        android:paddingVertical="7dp"
+        android:text="Global"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:fontFamily="@font/prociono"
+        android:textColor="#03476D"
+        android:elevation="15dp"/>
+
+
+    <TextView
         android:id="@+id/Entertainment"
         android:layout_width="150dp"
         android:layout_height="wrap_content"

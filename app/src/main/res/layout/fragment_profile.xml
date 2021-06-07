@@ -69,7 +69,6 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:visibility="visible"
-                    android:backgroundTint="@color/white"
                     android:src="@drawable/cam" />
 
             </androidx.cardview.widget.CardView>

@@ -2,7 +2,6 @@ package com.example.newsforyou.Activities
 
 
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.widget.TextView
@@ -31,11 +30,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var medical: TextView
     lateinit var sports: TextView
     lateinit var bookmarkTab: TextView
+    lateinit var global: TextView
 
-    var fancyHome: FancyShowCaseView? = null
-    var fancyProfile: FancyShowCaseView? = null
+    private var fancyHome: FancyShowCaseView? = null
+    private var fancyProfile: FancyShowCaseView? = null
 
-    var fancyShowCaseQueue: FancyShowCaseQueue? = null
+    private var fancyShowCaseQueue: FancyShowCaseQueue? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +68,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onShowIntro() {
-
-
 
         val typeface =
             ResourcesCompat.getFont(this, R.font.prociono)
@@ -106,6 +104,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        global = findViewById(R.id.Global)
         entertainment = findViewById(R.id.Entertainment)
         sports = findViewById(R.id.Sports)
         business = findViewById(R.id.Business)
@@ -121,7 +120,7 @@ class MainActivity : AppCompatActivity() {
         if (supportFragmentManager.findFragmentById(R.id.frame) is ProfileFragment)
             return
 
-        supportFragmentManager.beginTransaction().addToBackStack(null)
+        supportFragmentManager.beginTransaction()
             .replace(R.id.frame, profileFragment).commit()
     }
 
@@ -129,5 +128,15 @@ class MainActivity : AppCompatActivity() {
         if (supportFragmentManager.findFragmentById(R.id.frame) is NewsFragment)
             return
         supportFragmentManager.beginTransaction().replace(R.id.frame, newsFragment).commit()
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.findFragmentById(R.id.frame) is ProfileFragment) {
+            bottomNav.menu.select(R.id.news)
+            supportFragmentManager.beginTransaction().replace(R.id.frame, newsFragment).commit()
+        }
+        else{
+            super.onBackPressed()
+        }
     }
 }

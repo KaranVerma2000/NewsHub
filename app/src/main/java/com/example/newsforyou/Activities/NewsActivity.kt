@@ -3,6 +3,7 @@ package com.example.newsforyou.Activities
 
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.example.newsforyou.R
 import com.example.newsforyou.Utils.UtilMethods.convertISOTime
@@ -22,7 +24,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class NewsActivity : AppCompatActivity() {
 
-
+    lateinit var webNews: ConstraintLayout
+    lateinit var webImage : ImageView
     lateinit var image: ImageView
     lateinit var heading: TextView
     lateinit var description: TextView
@@ -32,7 +35,6 @@ class NewsActivity : AppCompatActivity() {
     lateinit var share: FloatingActionButton
     lateinit var bookmark: ExtendedFloatingActionButton
     private var clicked = false
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +49,8 @@ class NewsActivity : AppCompatActivity() {
         expandButton = findViewById(R.id.expand)
         share = findViewById(R.id.share)
         bookmark = findViewById(R.id.bookmark)
+        webNews = findViewById(R.id.webNews)
+        webImage = findViewById(R.id.bottomImage)
 
 
         heading.text = intent.getStringExtra("title")
@@ -84,7 +88,6 @@ class NewsActivity : AppCompatActivity() {
 
 
         share.setOnClickListener {
-            Toast.makeText(applicationContext, "clicked", Toast.LENGTH_SHORT).show()
 
             val imageUri = Uri.parse(intent.getStringExtra("urlToImage"))
             val sendIntent: Intent = Intent().setAction(Intent.ACTION_SEND)
@@ -137,6 +140,14 @@ class NewsActivity : AppCompatActivity() {
 
                 Bookmark(this).bookmarkDao().addBookmark(bookmark)
             }
+        }
+
+        webNews.setOnClickListener {
+                val browserIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(intent.getStringExtra("url"))
+                )
+                startActivity(browserIntent)
         }
     }
 

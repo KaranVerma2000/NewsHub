@@ -3,12 +3,14 @@ package com.example.newsforyou.Fragments
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -30,6 +32,9 @@ import com.faltenreich.skeletonlayout.applySkeleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import me.toptas.fancyshowcase.FancyShowCaseQueue
+import me.toptas.fancyshowcase.FancyShowCaseView
+import me.toptas.fancyshowcase.FocusShape
 import retrofit2.Response
 import java.util.*
 
@@ -43,6 +48,10 @@ class NewsFragment : Fragment() {
     lateinit var anim: LottieAnimationView
     lateinit var noBookmark: TextView
     lateinit var ApiInterface: apiInterface
+
+    private var fancymenu : FancyShowCaseView? = null
+    private var fancyShowCase: FancyShowCaseQueue? = null
+
 
     val response: MutableLiveData<Response<NewsModel>> = MutableLiveData()
 
@@ -82,6 +91,7 @@ class NewsFragment : Fragment() {
         }
         fetchNews(view)
 
+        globalNews(a, view)
         entertainmentNews(a, view)
         businessNews(a, view)
         sportsNews(a, view)
@@ -204,6 +214,46 @@ class NewsFragment : Fragment() {
         return view
     }
 
+//    private fun showCase() {
+//        val typeface =
+//            ResourcesCompat.getFont(this.requireContext(), R.font.prociono)
+//
+//
+//        fancymenu = FancyShowCaseView.Builder(this.requireActivity())
+//            .focusOn(Objects.requireNonNull(drawer_button))
+//            .focusShape(FocusShape.ROUNDED_RECTANGLE)
+//            .roundRectRadius(90)
+//            .titleGravity(Gravity.CENTER)
+//            .titleSize(28, TypedValue.COMPLEX_UNIT_SP)
+//            .enableAutoTextPosition()
+//            .typeface(typeface)
+//            .showOnce("FANCY_MENU")
+//            .title("Tap to see News of different category")
+//            .build()
+//
+//        fancyShowCase = FancyShowCaseQueue()
+//        fancyShowCase!!.add(fancymenu!!)
+//
+//        fancyShowCase!!.show()
+//    }
+
+    private fun globalNews(a: MainActivity, view: View?) {
+        a.global.setOnClickListener {
+            newsHeading.text = "Global News"
+            a.motion_layout.closeDrawer(Gravity.LEFT, true)
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    response.postValue(ApiInterface.getNews())
+                    //       Toast.makeText(view.context, "Api fetch", Toast.LENGTH_LONG).show()
+                } catch (e: Exception) {
+                    Log.d("NewsError", e.message!!)
+                }
+            }
+            if (view != null) {
+                fetchNews(view)
+            }
+        }
+    }
 
 
     private fun techNews(a: MainActivity, view: View?) {

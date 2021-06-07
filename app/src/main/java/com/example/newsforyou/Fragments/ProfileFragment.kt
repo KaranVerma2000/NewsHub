@@ -109,10 +109,10 @@ class ProfileFragment : Fragment() {
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         displayImage(view)
-                        Toast.makeText(view!!.context, "Image Uploaded", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireView().context, "Image Uploaded", Toast.LENGTH_SHORT).show()
                         camBTn.visibility = View.INVISIBLE
                     } else {
-                        Toast.makeText(view!!.context, it.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireView().context, it.toString(), Toast.LENGTH_SHORT).show()
                         Log.d("image", it.toString())
                     }
                 }
@@ -128,11 +128,11 @@ class ProfileFragment : Fragment() {
                 }
                 val user = value!!.toObject(UserItem::class.java)
                 if (!user?.image.isNullOrBlank()) {
-                    Glide.with(view!!).load(user!!.image).into(profileImage)
                     camBTn.visibility = View.INVISIBLE
+                    Glide.with(requireView()).load(user!!.image).into(profileImage)
                 } else {
                     Toast.makeText(
-                        view!!.context,
+                        requireView().context,
                         "Tap camera to upload profile pic ! ",
                         Toast.LENGTH_SHORT
                     ).show()
