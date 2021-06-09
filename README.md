@@ -21,7 +21,7 @@ Implemented Motion Layout and other libraries to make attractive UI.
 ## 📷 Screen Shots
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/55995914/121322994-13ede080-c92d-11eb-95a0-531ec86a5a36.png">
+<img src="https://user-images.githubusercontent.com/55995914/121361382-dc922a80-c952-11eb-970e-056e6fac1dcd.png">
 
 
 ## If you liked the project don't forget to star 🌟 and fork 🍽 the project.
