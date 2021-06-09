@@ -1,7 +1,7 @@
 
-# News Hub <img src="https://user-images.githubusercontent.com/55995914/121325188-05a0c400-c92f-11eb-8583-28fb98450605.png" width="40" height="40">
+# News Hub <img src="https://user-images.githubusercontent.com/55995914/121363550-ae154f00-c954-11eb-8730-d155d1a3872b.png" width="40" height="40">
 <p align="center">
-<img src="https://user-images.githubusercontent.com/55995914/121316682-31b84700-c927-11eb-8059-9a7ee4427050.png" width="800">
+<img src="https://user-images.githubusercontent.com/55995914/121363273-6c84a400-c954-11eb-8017-8a2ad40a359d.png" width="800">
 
 #### News Hub display news of different category (Entertainment, Business, International, Sports, Medical, Technology, Global).
 It has phone authorization and stores user data in Firebase db ( user's name, user's profile, user'image) and also user can bookmark news ,stores in Room db.
